@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 from rich.console import Console
+from rich.prompt import Prompt
+from rich.table import Table
 # Menu driven network scanning tool:
 import nmap
 import sys
@@ -18,16 +20,16 @@ def main_menu():
     console.print("6.Scan ARP packet", style="bold #00FF00")
     console.print("7.Scan all port only", style="bold #00FF00")
     console.print("8.Scan in verbose mode", style="bold #00FF00")
-    console.print("9.Exit")
+    console.print("9.Exit", style="bold #00FF00")
 
 
 while True:
     main_menu()
-    ch = int(input("Enter choice: "))
+    ch = int(Prompt.ask("Enter choice "))
     nm = nmap.PortScanner()  # Create object of nmap port scannet class
     # nm = nmap.PortScanner()
 
-    print("Wait.......................")
+    console.print("Wait.......................", style="bold red")
     # Returns Dictinary
     # ip = input("Enter the IP : ")
     ip = str(sys.argv[1])
@@ -61,10 +63,11 @@ while True:
         address = f" Address : {scan['scan'][ip]['addresses']}"
         status = f"status : {scan['scan'][ip]['status']}"
 
-        print(hostname, address, status, end='\n')
+        console.print(hostname, address, status, end='\n',
+                      style="bold italic #FF00FF")
         for port in scan['scan'][ip]['tcp'].items():
-            print(
-                f"{port[0]}, state : {port[1]['state']},name : {port[1]['name']},reason : {port[1]['reason']},Product : {port[1]['product']},version : {port[1]['version']},conf: {port[1]['conf']},cpe : {port[1]['cpe']}")
+            console.print(
+                f"{port[0]}, state : {port[1]['state']},name : {port[1]['name']},reason : {port[1]['reason']},Product : {port[1]['product']},version : {port[1]['version']},conf: {port[1]['conf']},cpe : {port[1]['cpe']}", style="bold #00FFFF")
 
     if ch == 1:
 
@@ -75,7 +78,7 @@ while True:
             # print(f" scan Info : {nm.scaninfo()}")
             result()
         except:
-            print("Use root priviliege")
+            console.print("Use root priviliege", style="bold red")
     elif ch == 2:
         # nm = nmap.PortScanner()  # create object of nmap port scanner class
 
@@ -87,7 +90,7 @@ while True:
             # print("scan Info : ", nm.scaninfo())
             result()
         except:
-            print("Use root priviliege")
+            console.print("Use root priviliege", style="bold red")
 
         # print(scan)
     elif ch == 3:
@@ -99,7 +102,7 @@ while True:
             # print(scan)
             result()
         except:
-            print("use root privililage")
+            console.print("Use root priviliege", style="bold red")
     elif ch == 4:
         # scan range
         try:
@@ -128,8 +131,9 @@ while True:
     elif ch == 8:
         nmap_ip = "nmap -v " + ip
         scan = os.system(nmap_ip)
-        print(scan)
+        # print(scan)
+
     elif ch == 9:
         break
     else:
-        print("Wrong Choice")
+        console.print("Wrong choice", style="bold red")
