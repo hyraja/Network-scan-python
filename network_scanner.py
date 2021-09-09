@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from rich import style
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.table import Table
@@ -35,7 +36,7 @@ while True:
     ip = str(sys.argv[1])
     # rangel = input('Enter range like 1-2000 : ')
     rangel = str(sys.argv[2])
-    # interface = input("Enter interface : like -v -sS -O -e enp0s3 : ")
+    # interface = input("Enter interface : like -v -s S -O -e enp0s3 : ")
     # -v --> for verbose output
     verbose = sys.argv[3]
     # -s for scan
@@ -74,7 +75,8 @@ while True:
         try:
 
             scan = nm.scan(ip, rangel, os_command)
-            print(f'Command : {nm.command_line()}')
+            console.print(
+                f'Command : {nm.command_line()}', style="bold yellow")
             # print(f" scan Info : {nm.scaninfo()}")
             result()
         except:
@@ -86,7 +88,8 @@ while True:
 
             scan = nm.scan(ports=rangel, arguments=os_command)
             # print(scan)
-            print(f'Command : {nm.command_line()}')
+            console.print(
+                f'Command : {nm.command_line()}', style="bold yellow")
             # print("scan Info : ", nm.scaninfo())
             result()
         except:
@@ -97,7 +100,8 @@ while True:
         # scan single host
         try:
             scan = nm.scan(ip)
-            print(f'Command : {nm.command_line()}')
+            console.print(
+                f'Command : {nm.command_line()}', style="bold yellow")
             # print("scan Info : ", nm.scaninfo())
             # print(scan)
             result()
@@ -108,7 +112,8 @@ while True:
         try:
 
             scan = nm.scan(ip, rangel)
-            print(f'Command : {nm.command_line()}')
+            console.print(
+                f'Command : {nm.command_line()}', style="bold yellow")
             # print("scan Info : ", nm.scaninfo())
             # print(scan)
             result()
