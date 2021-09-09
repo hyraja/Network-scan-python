@@ -1,22 +1,24 @@
 #!/usr/bin/python3
-
+from rich.console import Console
 # Menu driven network scanning tool:
 import nmap
 import sys
 # import popen
 import os
 
+console = Console()
+
 
 def main_menu():
-    print("1.Get device details")
-    print("2.Scan the network for open port")
-    print("3.Scan single host ")
-    print("4.Scan range")
-    print("5.Aggressive scan")
-    print("6.Scan ARP packet")
-    print("7.Scan all port only")
-    print("8.Scan in verbose mode")
-    print("9.Exit")
+    console.print("1.Get device details", style="bold #00FF00")
+    console.print("2.Scan the network for open port", style="bold #00FF00")
+    console.print("3.Scan single host ", style="bold #00FF00")
+    console.print("4.Scan range", style="bold #00FF00")
+    console.print("5.Aggressive scan", style="bold #00FF00")
+    console.print("6.Scan ARP packet", style="bold #00FF00")
+    console.print("7.Scan all port only", style="bold #00FF00")
+    console.print("8.Scan in verbose mode", style="bold #00FF00")
+    console.print("9.Exit")
 
 
 while True:
