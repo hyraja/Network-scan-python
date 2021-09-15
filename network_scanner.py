@@ -15,6 +15,10 @@ def cp(string):
     console.print(Text(string, style='bold #00FF00'))
 
 
+def run_cmd(str):
+    return os.popen(str).read()
+
+
 def main_menu():
     cp("1.Get device details")
     cp("2.Scan the network for open port")
@@ -123,23 +127,19 @@ while True:
         except:
             pass
     elif ch == 5:
-        nmapip = "nmap -A " + ip
-        scan = os.system(nmapip)
+        cmd = "nmap -A " + ip
         # nmap - sp 192.168.1.1/24
-        print(scan)
+        cp(run_cmd(cmd))
     elif ch == 6:
         # nmap 192.168.1.0/24 - PR
-        nmap_ip = "nmap " + ip + " -PR"
-        scan = os.system(nmap_ip)
-        print(scan)
+        cmd = "nmap " + ip + " -PR"
+        cp(run_cmd(cmd))
     elif ch == 7:
-        nmap_ip = "nmap -Pn " + ip
-        scan = os.system(nmap_ip)
-        print(scan)
+        cmd = "nmap -Pn " + ip
+        cp(run_cmd(cmd))
     elif ch == 8:
-        nmap_ip = "nmap -v " + ip
-        scan = os.system(nmap_ip)
-        # print(scan)
+        cmd = "nmap -v " + ip
+        cp(run_cmd(cmd))
 
     elif ch == 9:
         break
